@@ -116,6 +116,7 @@ def coletar(data_inicio, data_fim, modalidade=None):
                         orgaoEsfera=pub.get("orgaoEntidade", {}).get("esferaId", ""),
                         ano=ano,
                         sequencial=seq,
+                        numeroCompra=pub.get("numeroCompra", ""),
                         modalidadeId=pub.get("modalidadeId"),
                         modalidadeNome=pub.get("modalidadeNome", ""),
                         situacaoId=pub.get("situacaoCompraId"),
