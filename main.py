@@ -17,7 +17,6 @@ import sys
 import time
 import logging
 from datetime import datetime
-from dataclasses import asdict
 
 import config
 from utils import gerar_id, gerar_link_pncp

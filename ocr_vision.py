@@ -99,6 +99,7 @@ def _ocr_pymupdf(pdf_path):
 
     doc = fitz.open(pdf_path)
     all_text = []
+    num_pages = doc.page_count
     for page in doc:
         text = page.get_text()
         if text:
@@ -106,5 +107,5 @@ def _ocr_pymupdf(pdf_path):
     doc.close()
 
     texto = "\n".join(all_text)
-    log.info("PyMuPDF: %s → %d chars, %d páginas", os.path.basename(pdf_path), len(texto), doc.page_count)
+    log.info("PyMuPDF: %s → %d chars, %d páginas", os.path.basename(pdf_path), len(texto), num_pages)
     return texto

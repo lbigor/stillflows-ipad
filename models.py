@@ -6,6 +6,15 @@ from dataclasses import dataclass, field, asdict
 from typing import List, Optional
 
 
+def _strip_none(obj):
+    """Remove recursivamente chaves com valor None de dicts/listas."""
+    if isinstance(obj, dict):
+        return {k: _strip_none(v) for k, v in obj.items() if v is not None}
+    if isinstance(obj, list):
+        return [_strip_none(i) for i in obj]
+    return obj
+
+
 @dataclass
 class IngestItemDTO:
     numeroItem: int = 0
@@ -63,9 +72,7 @@ class IngestLicitacaoDTO:
     resultados: List[IngestResultadoDTO] = field(default_factory=list)
 
     def to_dict(self):
-        d = asdict(self)
-        # Remover None para JSON mais limpo
-        return {k: v for k, v in d.items() if v is not None}
+        return _strip_none(asdict(self))
 
 
 @dataclass
@@ -82,8 +89,7 @@ class IngestAnexoOcrDTO:
     statusOcr: str = "PROCESSADO"
 
     def to_dict(self):
-        d = asdict(self)
-        return {k: v for k, v in d.items() if v is not None}
+        return _strip_none(asdict(self))
 
 
 @dataclass

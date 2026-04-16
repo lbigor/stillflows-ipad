@@ -109,6 +109,7 @@ class PncpClient:
                 log.warning("Timeout em %s (tent %d/%d) — aguardando %ds",
                            url, tentativa, config.RETRY_MAX, wait)
                 time.sleep(wait)
+                continue
             except Exception as e:
                 log.warning("Erro em %s (tent %d/%d): %s",
                            url, tentativa, config.RETRY_MAX, e)
